@@ -25,6 +25,7 @@ class Reserve(models.Model):
     def __str__(self):
         return f"{self.name} - {self.contact}"
 
+
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=50)
     description = models.TextField()
@@ -50,7 +51,7 @@ class Category(models.Model):
 
 
 class Food(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_food')
     food_name = models.CharField(max_length=80)
     food_description = models.TextField()
     food_price = models.PositiveSmallIntegerField(default=0)
@@ -62,7 +63,7 @@ class Food(models.Model):
 
 class Supplement(models.Model):
     supplement_name = models.CharField(max_length=64)
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='supplement_food')
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
