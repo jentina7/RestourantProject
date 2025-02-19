@@ -29,16 +29,46 @@ class InteriorCreateAPIView(generics.CreateAPIView):
     serializer_class = InteriorCreateSerializer
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryListAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
-class FoodViewSet(viewsets.ModelViewSet):
+class CategoryCreateAPIView(generics.CreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryDetailSerializer
+
+
+class FoodSimpleViewSet(viewsets.ModelViewSet):
     queryset = Food.objects.all()
-    serializer_class = FoodSerializer
+    serializer_class = FoodSimpleSerializer
 
 
-class SupplementViewSet(viewsets.ModelViewSet):
-    queryset = Supplement.objects.all()
-    serializer_class = SupplementSerializer
+# class SupplementViewSet(viewsets.ModelViewSet):
+#     queryset = Supplement.objects.all()
+#     serializer_class = SupplementSerializer
+
+
+class FoodListAPIView(generics.ListAPIView):
+    queryset = Food.objects.all()
+    serializer_class = FoodListSerializer
+
+
+class FoodCreateAPIView(generics.CreateAPIView):
+    queryset = Food.objects.all()
+    serializer_class = FoodCreateSerializer
+
+
+class FoodRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Food.objects.all()
+    serializer_class = FoodDetailSerializer
+
+
+class FoodDetailSimpleAPIView(generics.ListAPIView):
+    queryset = Food.objects.all()
+    serializer_class = FoodDetailSimpleSerializer

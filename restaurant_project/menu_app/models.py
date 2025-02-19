@@ -2,6 +2,7 @@ from django.db import models
 from multiselectfield import MultiSelectField
 from phonenumber_field.modelfields import PhoneNumberField
 
+
 class WorkingDays(models.Model):
     shift_start = models.DateTimeField()
     shift_end = models.DateTimeField()
@@ -24,6 +25,7 @@ class Reserve(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.contact}"
+
 
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=50)
@@ -50,7 +52,7 @@ class Category(models.Model):
 
 
 class Food(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_food')
     food_name = models.CharField(max_length=80)
     food_description = models.TextField()
     food_price = models.PositiveSmallIntegerField(default=0)
@@ -62,7 +64,7 @@ class Food(models.Model):
 
 class Supplement(models.Model):
     supplement_name = models.CharField(max_length=64)
-    food = models.ManyToManyField(Food)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='supplement_food')
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
