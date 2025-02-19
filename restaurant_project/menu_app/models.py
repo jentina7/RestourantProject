@@ -62,7 +62,7 @@ class Food(models.Model):
 
 class Supplement(models.Model):
     supplement_name = models.CharField(max_length=64)
-    food = models.ManyToManyField(Food)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
