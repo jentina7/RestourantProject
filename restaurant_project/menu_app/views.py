@@ -1,12 +1,7 @@
-from django.shortcuts import render
-from rest_framework.filters import SearchFilter
-
 from .models import *
 from .serializers import *
 from rest_framework import viewsets, generics
 from .pagination import CustomPagination
-from rest_framework import filters
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class WorkingDaysViewSet(viewsets.ModelViewSet):
@@ -42,8 +37,6 @@ class CategoryListAPIView(generics.ListAPIView):
 class CategoryCreateAPIView(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['food_name']
 
 
 class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -70,12 +63,11 @@ class FoodCreateAPIView(generics.CreateAPIView):
     queryset = Food.objects.all()
     serializer_class = FoodCreateSerializer
 
-    serializer_class = FoodSerializer
-    pagination_class = CustomPagination
 
 class FoodRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Food.objects.all()
     serializer_class = FoodDetailSerializer
+    pagination_class = CustomPagination
 
 
 class FoodDetailSimpleAPIView(generics.ListAPIView):
